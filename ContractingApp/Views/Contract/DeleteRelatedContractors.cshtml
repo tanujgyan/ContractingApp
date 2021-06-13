@@ -1,0 +1,74 @@
+﻿@model ContractingApp.ViewModel.ContractorRelationViewModelForDelete
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+@{
+    ViewData["Title"] = "Terminate Contract";
+}
+
+<h1>Terminate Contract</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DeleteRelatedContractors">
+            @if (!ViewData.ModelState.IsValid)
+            {
+
+            }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <label asp-for="Contractor1Id" class="control-label">Contractor</label>
+                <select asp-for="Contractor1Id" id="primarycontractor"
+                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))">
+                    <option>Please select one</option>
+                </select>
+                <span asp-validation-for="Contractor1Id" class="text-danger"></span>
+
+                <input type="submit" value="Fetch Related" asp-action="FetchRelatedData" onclick="fetchRelated()" class="btn btn-primary" />
+            </div>
+
+            @if (Model.DependentContractorList != null)
+            {
+
+                var primid = @Model.ContractorList.FirstOrDefault(x => x.Id == (int)TempData["selectedValue"]).Id;
+                <script type="text/javascript">
+                    let element = document.getElementById('primarycontractor');
+                    element.value = @primid
+                </script>
+                <div>
+                    <p>
+                        Related Contractors for @Model.ContractorList.FirstOrDefault(x => x.Id == (int)TempData["selectedValue"]).Name are
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Contractor2Id" class="control-label">Contractor 2</label>
+                    <select asp-for="Contractor2Id" id="contractor2"
+                            asp-items="@(new SelectList(Model.DependentContractorList, "Id", "Name"))">
+                        <option>Please select one</option>
+                    </select>
+                    @Html.ValidationMessage("Contractor2Id")
+                    <span asp-validation-for="Contractor2Id" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Terminate Relation" onclick="validateContractor2()" class="btn btn-primary" />
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Contractor" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+            alert("Contract terminated successfully");
+        </script>
+    }
+}

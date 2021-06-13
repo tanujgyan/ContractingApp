@@ -1,0 +1,93 @@
+﻿@model ContractingApp.Models.Contractor
+
+@{
+    ViewData["Title"] = "Add Contractor";
+}
+
+<h3>Add Contractor</h3>
+<hr />
+<br />
+<h4>Contractor Details</h4>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddNewContractor">
+            <div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label"></label>
+                    <select asp-for="Type" asp-items="Html.GetEnumSelectList<ContractorType>()" class="form-control"></select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div>
+                <h4>Address</h4>
+
+                <div class="form-group">
+                    <label asp-for="ContractorAddress.StreetNumber" class="control-label"></label>
+                    <input asp-for="ContractorAddress.StreetNumber" class="form-control" />
+                    <span asp-validation-for="ContractorAddress.StreetNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContractorAddress.StreetName" class="control-label"></label>
+                    <input asp-for="ContractorAddress.StreetName" class="form-control" />
+                    <span asp-validation-for="ContractorAddress.StreetName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContractorAddress.Suite" class="control-label"></label>
+                    <input asp-for="ContractorAddress.Suite" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContractorAddress.City" class="control-label"></label>
+                    <input asp-for="ContractorAddress.City" class="form-control" />
+                    <span asp-validation-for="ContractorAddress.City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContractorAddress.Province" class="control-label"></label>
+                    <input asp-for="ContractorAddress.Province" class="form-control" />
+                    <span asp-validation-for="ContractorAddress.Province" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContractorAddress.Country" class="control-label"></label>
+                    <input asp-for="ContractorAddress.Country" class="form-control" />
+                    <span asp-validation-for="ContractorAddress.Country" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContractorAddress.PostalCode" class="control-label"></label>
+                    <input asp-for="ContractorAddress.PostalCode" class="form-control" />
+                    <span asp-validation-for="ContractorAddress.PostalCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Contractor" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+            alert("Contractor added successfully");
+        </script>
+    }
+   
+}
