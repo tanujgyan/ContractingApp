@@ -78,7 +78,7 @@ namespace ContractingApp.Models
                     },
                      new ContractorRelations
                      {
-                         Contractor1Id = 1,
+                         Contractor1Id = 2,
                          Contractor2Id = 3,
                          Id = 2
                      });

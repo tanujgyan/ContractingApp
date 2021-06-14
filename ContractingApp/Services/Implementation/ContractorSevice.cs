@@ -48,6 +48,11 @@ namespace ContractingApp.Services.Implementation
            return contractorRepository.GetRelatedContractors(contractorId);
         }
 
+        public string GetShortestContractingChain(int contractor1Id, int contractor2Id)
+        {
+            return contractorRepository.GetShortestContractingChain(contractor1Id, contractor2Id);
+        }
+
         public bool IsContractorAlreadyRelated(int contractor1Id, int contractor2Id)
         {
             return contractorRepository.IsContractorAlreadyRelated(contractor1Id, contractor2Id);

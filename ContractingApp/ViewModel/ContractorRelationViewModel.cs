@@ -17,5 +17,7 @@ namespace ContractingApp.ViewModel
         public string Contractor2Name { get; set; }
         public List<Contractor> ContractorList { get; set; }
         public List<Contractor> DependentContractorList { get; set; }
+        public bool IsShortestChainCalculated { get; set; }
+        public string ShortestContractingChain { get; set; }
     }
 }
