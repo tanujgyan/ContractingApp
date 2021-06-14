@@ -106,6 +106,32 @@ namespace ContractingApp.Controllers
 
             return View(vm);
         }
+        [HttpGet]
+        public IActionResult GetShortestContractingChain()
+        {
+            var vm = CreateContractorRelationViewModel();
+            return View(vm);
+        }
+        [HttpPost]
+        public IActionResult GetShortestContractingChain(ContractorRelationViewModel vm)
+        {
+            int contractor1Id = vm.Contractor1Id;
+            int contractor2Id = vm.Contractor2Id;
+            if (vm.Contractor1Id == vm.Contractor2Id)
+            {
+                ModelState.AddModelError("Contractor1Id", "Contractor1 cannot be same as Contractor2");
+            }
+           
+            vm = CreateContractorRelationViewModel();
+            if (ModelState.IsValid)
+            {
+                vm.ShortestContractingChain = contractService.GetShortestContractingChain(contractor1Id, contractor2Id);
+                vm.IsShortestChainCalculated = true;
+            }
+
+            return View(vm);
+
+        }
         private ContractorRelationViewModel CreateContractorRelationViewModel()
         {
             var contractors = contractService.AddNewContractRelation().Result;
