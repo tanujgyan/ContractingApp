@@ -16,5 +16,6 @@ namespace ContractingApp.Repository.Contracts
         List<int> GetRelatedContractors(int contractorId);
         int TerminateContractorRelation(int contractor1Id, int contractor2Id);
         Task<Contractor> GetContractorDetails(int contractorId);
+        string GetShortestContractingChain(int contractor1Id, int contractor2Id);
     }
 }
