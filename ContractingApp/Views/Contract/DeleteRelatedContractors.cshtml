@@ -20,11 +20,14 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <label asp-for="Contractor1Id" class="control-label">Contractor</label>
                 <select asp-for="Contractor1Id" id="primarycontractor"
-                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))">
+                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))" class="form-control">
                     <option>Please select one</option>
                 </select>
                 <span asp-validation-for="Contractor1Id" class="text-danger"></span>
 
+              
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Fetch Related" asp-action="FetchRelatedData" onclick="fetchRelated()" class="btn btn-primary" />
             </div>
 
@@ -44,7 +47,7 @@
                 <div class="form-group">
                     <label asp-for="Contractor2Id" class="control-label">Contractor 2</label>
                     <select asp-for="Contractor2Id" id="contractor2"
-                            asp-items="@(new SelectList(Model.DependentContractorList, "Id", "Name"))">
+                            asp-items="@(new SelectList(Model.DependentContractorList, "Id", "Name"))" class="form-control">
                         <option>Please select one</option>
                     </select>
                     @Html.ValidationMessage("Contractor2Id")

@@ -1,54 +1,48 @@
 ﻿@model ContractingApp.ViewModel.ContractorRelationViewModel
 
-
 @{
-    ViewData["Title"] = "Create Contract";
+    ViewData["Title"] = "GetShortestContractingChain";
 }
 
-<h1>Create Contract</h1>
+<h3>Shortest Contracting Chain</h3>
 
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddNewContractRelation" id="createcontractForm">
+        <form asp-action="GetShortestContractingChain">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Contractor1Id" class="control-label">Contractor 1 </label>
-                <select id="createcontract_contractor1Id" asp-for="Contractor1Id"
+                <select asp-for="Contractor1Id"
                         asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))" class="form-control">
                     <option>Please select one</option>
                 </select>
-
                 <span asp-validation-for="Contractor1Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Contractor2Id" class="control-label">Contractor 2 </label>
-                <select id="createcontract_contractor2Id" asp-for="Contractor2Id"
+                <select asp-for="Contractor2Id"
                         asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))" class="form-control">
                     <option>Please select one</option>
                 </select>
                 <span asp-validation-for="Contractor2Id" class="text-danger"></span>
-
             </div>
             <div class="form-group">
-                <input id="createcontractbutton" type="submit" value="Submit" class="btn btn-primary" />
-
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+            @if (Model.IsShortestChainCalculated)
+            {
+                <h5>@Model.ShortestContractingChain</h5>
+            }
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-controller="Contractor" asp-action="Index" id="backtolist">Back to List</a>
+    <a asp-controller="Contractor" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    @if (TempData["message"] != null)
-    {
-        <script type="text/javascript">
-            alert("Contract added successfully");
-        </script>
-    }
 }
