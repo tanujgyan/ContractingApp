@@ -11,6 +11,7 @@ namespace ContractingApp.Repository.Implementation
     public class ContractorRepository : IContractorRepository
     {
         private readonly ApplicationContext applicationContext;
+        private int NumberOfContractorsInSystem => applicationContext.Contractors.Count();
 
         public ContractorRepository(ApplicationContext applicationContext)
         {
@@ -161,11 +162,11 @@ namespace ContractingApp.Repository.Implementation
             if (adjacencyList.Count > 0)
             {
                 Queue<int> queue = new Queue<int>();
-                bool[] visited = new bool[adjacencyList.Count + 1];
+                bool[] visited = new bool[NumberOfContractorsInSystem+1];
 
                 bool flag = false;
                 List<int?> prev = new List<int?>();
-                for (int i = 0; i < adjacencyList.Count + 1; i++)
+                for (int i = 0; i < NumberOfContractorsInSystem + 1; i++)
                 {
                     prev.Add(null);
                 }
@@ -236,5 +237,6 @@ namespace ContractingApp.Repository.Implementation
             }
             return result;
         }
+       
     }
 }

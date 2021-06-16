@@ -26,7 +26,7 @@ namespace ContractingAppTest.Tests
         [Test]
         public void CreateContractTestMethod()
         {
-            Assert.That(createContract.IsContractorDropdownsDisplayed(), Is.True);
+            Assert.That(createContract.IsPageLoadedSuccessfully(), Is.True);
         }
         [Test]
         public void SubmitContractWithoutSelectingAnyContractorTestMethod()

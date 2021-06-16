@@ -15,88 +15,54 @@ namespace ContractingAppTest.Pages.CreateContract
             this.webDriver = webDriver;
         }
 
-        private IWebElement GetcreateContractElement()
-        {
-            return webDriver.FindElement(By.Id("createcontract"));
-        }
-        private IWebElement GetcreateContractContractor1Element()
-        {
-            return webDriver.FindElement(By.Id("createcontract_contractor1Id"));
-        }
-        private IWebElement GetcreateContractContractor2Element()
-        {
-            return webDriver.FindElement(By.Id("createcontract_contractor2Id"));
-        }
-        private IWebElement GetForm()
-        {
-            return webDriver.FindElement(By.Id("createcontractForm"));
-        }
-        private IWebElement GetContractor1NotSelectedErrorMessage()
-        {
-            return webDriver.FindElement(By.XPath("//*[@id='createcontract_contractor1Id-error']"));
-        }
-        private IWebElement GetSameContractorErrorMessage()
-        {
-            return webDriver.FindElement(By.XPath("//*[@id='createcontractForm']/div[1]/span"));
-        }
-        private IWebElement GetContractor2NotSelectedErrorMessage()
-        {
-            return webDriver.FindElement(By.XPath("//*[@id='createcontract_contractor2Id-error']"));
-        }
-        private IWebElement GetContractor1Dropdown()
-        {
-            return webDriver.FindElement(By.Id("createcontract_contractor1Id"));
-        }
-        private IWebElement GetContractor2Dropdown()
-        {
-            return webDriver.FindElement(By.Id("createcontract_contractor2Id"));
-        }
-        private IWebElement GetBackToListLink()
-        {
-            return webDriver.FindElement(By.Id("backtolist"));
-        }
-        private IWebElement GetContractorListTable()
-        {
-            return webDriver.FindElement(By.Id("contractortable"));
-        }
-        private IWebElement GetExistingContractErrorMessage()
-        {
-          return webDriver.FindElement(By.XPath("//*[@id='createcontractForm']/div[1]/span"));
-        }
+        private IWebElement GetcreateContractElement => webDriver.FindElement(By.Id("createcontract"));
+        private IWebElement GetcreateContractContractor1Element => webDriver.FindElement(By.Id("createcontract_contractor1Id"));
+        private IWebElement GetcreateContractContractor2Element => webDriver.FindElement(By.Id("createcontract_contractor2Id"));
+        private IWebElement Form => webDriver.FindElement(By.Id("createcontractForm"));
+        private IWebElement Contractor1NotSelectedErrorMessage => webDriver.FindElement(By.XPath("//*[@id='createcontract_contractor1Id-error']"));
+        private IWebElement SameContractorErrorMessage => webDriver.FindElement(By.XPath("//*[@id='createcontractForm']/div[1]/span"));
+        private IWebElement Contractor2NotSelectedErrorMessage => webDriver.FindElement(By.XPath("//*[@id='createcontract_contractor2Id-error']"));
+        private IWebElement Contractor1Dropdown => webDriver.FindElement(By.Id("createcontract_contractor1Id"));
+        private IWebElement Contractor2Dropdown => webDriver.FindElement(By.Id("createcontract_contractor2Id"));
+        private IWebElement BackToListLink => webDriver.FindElement(By.Id("backtolist"));
+        private IWebElement ContractorListTable => webDriver.FindElement(By.Id("contractortable"));
+        private IWebElement ExistingContractErrorMessage => webDriver.FindElement(By.XPath("//*[@id='createcontractForm']/div[1]/span"));
+        private IWebElement SubmitButton => webDriver.FindElement(By.Id("createcontractbutton"));
         public void SelectFirstElementInContractorDropdown()
         {
-            var selectElement = new SelectElement(GetContractor1Dropdown());
+            var selectElement = new SelectElement(Contractor1Dropdown);
             selectElement.SelectByValue("1");
-            selectElement = new SelectElement(GetContractor2Dropdown());
+            selectElement = new SelectElement(Contractor2Dropdown);
             selectElement.SelectByValue("1");
         }
         public void ClickCreateContractHyperLink()
         {
-            GetcreateContractElement().Click();
+            GetcreateContractElement.Click();
         }
         public void SubmitForm()
         {
-            GetForm().Submit();
+            Form.Submit();
         }
         public void ClickBackToList()
         {
-            GetBackToListLink().Click();
+            BackToListLink.Click();
         }
-        public bool IsContractorDropdownsDisplayed()
+        public bool IsPageLoadedSuccessfully()
         {
-            return GetcreateContractContractor1Element().Displayed && GetcreateContractContractor2Element().Displayed;
+            return GetcreateContractContractor1Element.Displayed && GetcreateContractContractor2Element.Displayed
+                && BackToListLink.Displayed && SubmitButton.Displayed;
         }
         public bool IsErrorMessageToSelectContractorDisplayed()
         {
-            return GetContractor1NotSelectedErrorMessage().Displayed && GetContractor2NotSelectedErrorMessage().Displayed;
+            return Contractor1NotSelectedErrorMessage.Displayed && Contractor2NotSelectedErrorMessage.Displayed;
         }
         public bool IsErrorMessageForSameContractorDisplayed()
         {
-            return GetSameContractorErrorMessage().Displayed;
+            return SameContractorErrorMessage.Displayed;
         }
         public bool IsHomePageDisplayed()
         {
-            return GetContractorListTable().Displayed;
+            return ContractorListTable.Displayed;
         }
 
         [Obsolete]
@@ -105,22 +71,26 @@ namespace ContractingAppTest.Pages.CreateContract
         //In the mockup data contractor 1 and 3 are not connected to each other directly
         public bool IsContractCreated()
         {
-            var selectElement = new SelectElement(GetContractor1Dropdown());
+            var selectElement = new SelectElement(Contractor1Dropdown);
             selectElement.SelectByValue("1");
-            selectElement = new SelectElement(GetContractor2Dropdown());
-            selectElement.SelectByValue("3");
+            selectElement = new SelectElement(Contractor2Dropdown);
+            selectElement.SelectByText("TestContractor1");
             SubmitForm();
             IAlert alert = ExpectedConditions.AlertIsPresent().Invoke(webDriver);
+            if (alert != null)
+            {
+                alert.Accept();
+            }
             return (alert != null);
         }
         public bool IsErrorMessageForAlreadyExistingContractDisplayed()
         {
-            var selectElement = new SelectElement(GetContractor1Dropdown());
+            var selectElement = new SelectElement(Contractor1Dropdown);
             selectElement.SelectByValue("1");
-            selectElement = new SelectElement(GetContractor2Dropdown());
+            selectElement = new SelectElement(Contractor2Dropdown);
             selectElement.SelectByValue("2");
             SubmitForm();
-            var val = GetExistingContractErrorMessage().Text;
+           var val = ExistingContractErrorMessage.Text;
            return val == "Contractor1 is already related to Contractor2" ? true : false;
             
         }
