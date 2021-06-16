@@ -11,12 +11,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddNewContractRelation">
+        <form asp-action="AddNewContractRelation" id="createcontractForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Contractor1Id" class="control-label">Contractor 1 </label>
-                <select asp-for="Contractor1Id"
-                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))">
+                <select id="createcontract_contractor1Id" asp-for="Contractor1Id"
+                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))" class="form-control">
                     <option>Please select one</option>
                 </select>
 
@@ -24,15 +24,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="Contractor2Id" class="control-label">Contractor 2 </label>
-                <select asp-for="Contractor2Id"
-                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))">
+                <select id="createcontract_contractor2Id" asp-for="Contractor2Id"
+                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))" class="form-control">
                     <option>Please select one</option>
                 </select>
                 <span asp-validation-for="Contractor2Id" class="text-danger"></span>
 
             </div>
             <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary" />
+                <input id="createcontractbutton" type="submit" value="Submit" class="btn btn-primary" />
 
             </div>
         </form>
@@ -40,7 +40,7 @@
 </div>
 
 <div>
-    <a asp-controller="Contractor" asp-action="Index">Back to List</a>
+    <a asp-controller="Contractor" asp-action="Index" id="backtolist">Back to List</a>
 </div>
 
 @section Scripts {

@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label asp-for="Contractor1Id" class="control-label">Contractor 1 </label>
                 <select asp-for="Contractor1Id"
-                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))">
+                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))" class="form-control">
                     <option>Please select one</option>
                 </select>
                 <span asp-validation-for="Contractor1Id" class="text-danger"></span>
@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label asp-for="Contractor2Id" class="control-label">Contractor 2 </label>
                 <select asp-for="Contractor2Id"
-                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))">
+                        asp-items="@(new SelectList(Model.ContractorList,"Id","Name"))" class="form-control">
                     <option>Please select one</option>
                 </select>
                 <span asp-validation-for="Contractor2Id" class="text-danger"></span>
