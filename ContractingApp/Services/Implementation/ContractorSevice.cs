@@ -14,63 +14,149 @@ namespace ContractingApp.Services.Implementation
 
         public ContractorSevice(IContractorRepository contractorRepository)
         {
-            this.contractorRepository = contractorRepository;
+            try
+            {
+                this.contractorRepository = contractorRepository;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public int AddContractor(Contractor contractor)
         {
-           contractor.HealthStatus = SelectHealthStatus();
-           return contractorRepository.AddContractor(contractor);
+            try
+            {
+                contractor.HealthStatus = SelectHealthStatus();
+                return contractorRepository.AddContractor(contractor);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public int AddNewContractRelation( int contractor1Id, int contractor2Id)
+        public int AddNewContractRelation(int contractor1Id, int contractor2Id)
         {
-            return contractorRepository.AddNewContractRelation(contractor1Id, contractor2Id);
+            try
+            {
+                return contractorRepository.AddNewContractRelation(contractor1Id, contractor2Id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         public Task<IEnumerable<Contractor>> AddNewContractRelation()
         {
-           return contractorRepository.AddNewContractRelation();
+            try
+            {
+                return contractorRepository.AddNewContractRelation();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Task<Contractor> GetContractorDetails(int contractorId)
         {
-            return contractorRepository.GetContractorDetails(contractorId);
+            try
+            {
+                return contractorRepository.GetContractorDetails(contractorId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Task<IEnumerable<Contractor>> GetContractors()
         {
-            return contractorRepository.GetContractors();
+            try
+            {
+                return contractorRepository.GetContractors();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<int> GetRelatedContractors(int contractorId)
         {
-           return contractorRepository.GetRelatedContractors(contractorId);
+            try
+            {
+                return contractorRepository.GetRelatedContractors(contractorId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public string GetShortestContractingChain(int contractor1Id, int contractor2Id)
         {
-            return contractorRepository.GetShortestContractingChain(contractor1Id, contractor2Id);
+            try
+            {
+                return contractorRepository.GetShortestContractingChain(contractor1Id, contractor2Id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public bool IsContractorAlreadyRelated(int contractor1Id, int contractor2Id)
         {
-            return contractorRepository.IsContractorAlreadyRelated(contractor1Id, contractor2Id);
+            try
+            {
+                return contractorRepository.IsContractorAlreadyRelated(contractor1Id, contractor2Id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public int TerminateContractorRelation(int contractor1Id, int contractor2Id)
         {
-           return contractorRepository.TerminateContractorRelation(contractor1Id, contractor2Id);
+            try
+            {
+                return contractorRepository.TerminateContractorRelation(contractor1Id, contractor2Id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         private HealthStatus SelectHealthStatus()
         {
-            var rand = new Random();
-            List<HealthStatus> list = new List<HealthStatus>() {HealthStatus.Green,
+            try
+            {
+                var rand = new Random();
+                List<HealthStatus> list = new List<HealthStatus>() {HealthStatus.Green,
                 HealthStatus.Green , HealthStatus.Green ,
                 HealthStatus.Green , HealthStatus.Green , HealthStatus.Green,
                 HealthStatus.Red,HealthStatus.Red,HealthStatus.Yellow,HealthStatus.Yellow};
-            var s = list[rand.Next(list.Count)];
-            return s;
+                var s = list[rand.Next(list.Count)];
+                return s;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
