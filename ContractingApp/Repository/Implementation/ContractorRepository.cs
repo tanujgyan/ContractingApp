@@ -191,7 +191,7 @@ namespace ContractingApp.Repository.Implementation
             try
             {
                 Dictionary<int, List<int>> adjacencyList = new Dictionary<int, List<int>>();
-                var relations = applicationContext.ContractorRelations.ToList();
+                var relations = applicationContext.ContractorRelations.Where(c=>c.IsDeleted==false).ToList();
                 foreach(var relation in relations)
                 {
                     if(adjacencyList.ContainsKey(relation.Contractor1Id))
