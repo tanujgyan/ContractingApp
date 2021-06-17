@@ -28,7 +28,7 @@
               
             </div>
             <div class="form-group">
-                <input type="submit" value="Fetch Related" asp-action="FetchRelatedData" onclick="fetchRelated()" class="btn btn-primary" />
+                <input type="submit" id="fetchrelatedcontractors" value="Fetch Related" asp-action="FetchRelatedData"  class="btn btn-primary" />
             </div>
 
             @if (Model.DependentContractorList != null)
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Terminate Relation" onclick="validateContractor2()" class="btn btn-primary" />
+                    <input type="submit" value="Terminate Relation" id="terminaterelation" onclick="validateContractor2()" class="btn btn-primary" />
                 </div>
             }
         </form>
@@ -63,7 +63,7 @@
 </div>
 
 <div>
-    <a asp-controller="Contractor" asp-action="Index">Back to List</a>
+    <a asp-controller="Contractor" asp-action="Index" id="backtolist">Back to List</a>
 </div>
 
 @section Scripts {

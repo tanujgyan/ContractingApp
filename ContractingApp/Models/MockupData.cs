@@ -30,8 +30,13 @@ namespace ContractingApp.Models
                             Id = 1,
                             StreetName = "Billy Road",
                             StreetNumber = 18,
-                            City = "Metropolis"
+                            Suite="12",
+                            City = "Metropolis",
+                            Province="Ontario",
+                            Country="Canada",
 
+                            PostalCode="M1M1M1",
+                            ContractorId = 1
                         },
                         HealthStatus = HealthStatus.Green,
                         PhoneNumber = "9089010908",
@@ -47,6 +52,9 @@ namespace ContractingApp.Models
                              StreetName = "Jane Street",
                              StreetNumber = 12,
                              City = "Metropolis",
+                             Province = "Ontario",
+                             Country = "Canada",
+                             PostalCode = "M1M1M1",
                              ContractorId = 2
                          },
                          HealthStatus = HealthStatus.Green,
@@ -63,6 +71,9 @@ namespace ContractingApp.Models
                              StreetName = "Jone Street",
                              StreetNumber = 12,
                              City = "Metropolis",
+                             Province = "Ontario",
+                             Country = "Canada",
+                             PostalCode = "M1M1M1",
                              ContractorId = 3
                          },
                          HealthStatus = HealthStatus.Green,
