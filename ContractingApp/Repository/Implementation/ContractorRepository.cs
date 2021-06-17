@@ -237,19 +237,20 @@ namespace ContractingApp.Repository.Implementation
         /// <returns></returns>
         private List<int> GetShortestContractingChainHelper(int contractor1Id, int contractor2Id, Dictionary<int, List<int>> adjacencyList)
         {
-           
-            List<int> path = new List<int>();
-            if (adjacencyList.Count > 0)
+            try
             {
-                Queue<int> queue = new Queue<int>();
-                bool[] visited = new bool[NumberOfContractorsInSystem+1];
-
-                bool flag = false;
-                List<int?> prev = new List<int?>();
-                for (int i = 0; i < NumberOfContractorsInSystem + 1; i++)
+                List<int> path = new List<int>();
+                if (adjacencyList.Count > 0)
                 {
-                    prev.Add(null);
-                }
+                    Queue<int> queue = new Queue<int>();
+                    bool[] visited = new bool[NumberOfContractorsInSystem + 1];
+
+                    bool flag = false;
+                    List<int?> prev = new List<int?>();
+                    for (int i = 0; i < NumberOfContractorsInSystem + 1; i++)
+                    {
+                        prev.Add(null);
+                    }
 
                     queue.Enqueue(contractor1Id);
                     visited[contractor1Id] = true;
@@ -260,16 +261,18 @@ namespace ContractingApp.Repository.Implementation
                         for (int i = 0; i < size; i++)
                         {
                             var contractorId = queue.Dequeue();
-
-                            foreach (var relatedContractorId in adjacencyList[contractorId])
+                            if (adjacencyList.ContainsKey(contractorId))
                             {
-                                if (!visited[relatedContractorId])
+                                foreach (var relatedContractorId in adjacencyList[contractorId])
                                 {
-                                    visited[relatedContractorId] = true;
-                                    queue.Enqueue(relatedContractorId);
+                                    if (!visited[relatedContractorId])
+                                    {
+                                        visited[relatedContractorId] = true;
+                                        queue.Enqueue(relatedContractorId);
 
-                                    prev[relatedContractorId] = contractorId;
+                                        prev[relatedContractorId] = contractorId;
 
+                                    }
                                 }
                             }
                             if (contractorId == contractor2Id)
@@ -286,6 +289,7 @@ namespace ContractingApp.Repository.Implementation
                     }
                 }
                 return path;
+
             }
             catch (System.Exception)
             {
@@ -300,7 +304,7 @@ namespace ContractingApp.Repository.Implementation
         /// <param name="contractor2Id"></param>
         /// <param name="prev"></param>
         /// <returns></returns>
-        private List<int> ReconstructPath(int contractor1Id,int contractor2Id,List<int?> prev)
+        private List<int> ReconstructPath(int contractor1Id, int contractor2Id, List<int?> prev)
         {
             try
             {
@@ -325,12 +329,12 @@ namespace ContractingApp.Repository.Implementation
         private List<string> GetNameFromIds(List<int> ids)
         {
             List<string> result = new List<string>();
-            foreach(var id in ids)
+            foreach (var id in ids)
             {
                 result.Add(applicationContext.Contractors.FirstOrDefault(x => x.Id == id).Name);
             }
             return result;
         }
-       
+
     }
 }

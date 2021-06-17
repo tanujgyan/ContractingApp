@@ -64,11 +64,11 @@ namespace ContractingApp.Models
                      new Contractor
                      {
                          Id = 3,
-                         Name = "Jone Doe",
+                         Name = "Alice Wayne",
                          ContractorAddress = new Address()
                          {
                              Id = 3,
-                             StreetName = "Jone Street",
+                             StreetName = "Alice Street",
                              StreetNumber = 12,
                              City = "Metropolis",
                              Province = "Ontario",
