@@ -17,5 +17,6 @@ This system connects to an InMemory DB. To change it to sql server we have to cr
 Selenium 3 and NUnit 3 is used for automated unit testing of this project \
 Architecture used is Page Object Model
 
+**Please refer to attached User Manual to learn more about how the system works **
 
 
