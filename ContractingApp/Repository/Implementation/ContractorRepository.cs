@@ -11,6 +11,7 @@ namespace ContractingApp.Repository.Implementation
     public class ContractorRepository : IContractorRepository
     {
         private readonly ApplicationContext applicationContext;
+        private int NumberOfContractorsInSystem => applicationContext.Contractors.Count();
 
         public ContractorRepository(ApplicationContext applicationContext)
         {
@@ -236,21 +237,19 @@ namespace ContractingApp.Repository.Implementation
         /// <returns></returns>
         private List<int> GetShortestContractingChainHelper(int contractor1Id, int contractor2Id, Dictionary<int, List<int>> adjacencyList)
         {
-
-            try
+           
+            List<int> path = new List<int>();
+            if (adjacencyList.Count > 0)
             {
-                List<int> path = new List<int>();
-                if (adjacencyList.Count > 0)
-                {
-                    Queue<int> queue = new Queue<int>();
-                    bool[] visited = new bool[adjacencyList.Count + 1];
+                Queue<int> queue = new Queue<int>();
+                bool[] visited = new bool[NumberOfContractorsInSystem+1];
 
-                    bool flag = false;
-                    List<int?> prev = new List<int?>();
-                    for (int i = 0; i < adjacencyList.Count + 1; i++)
-                    {
-                        prev.Add(null);
-                    }
+                bool flag = false;
+                List<int?> prev = new List<int?>();
+                for (int i = 0; i < NumberOfContractorsInSystem + 1; i++)
+                {
+                    prev.Add(null);
+                }
 
                     queue.Enqueue(contractor1Id);
                     visited[contractor1Id] = true;
@@ -325,20 +324,13 @@ namespace ContractingApp.Repository.Implementation
 
         private List<string> GetNameFromIds(List<int> ids)
         {
-            try
+            List<string> result = new List<string>();
+            foreach(var id in ids)
             {
-                List<string> result = new List<string>();
-                foreach (var id in ids)
-                {
-                    result.Add(applicationContext.Contractors.FirstOrDefault(x => x.Id == id).Name);
-                }
-                return result;
+                result.Add(applicationContext.Contractors.FirstOrDefault(x => x.Id == id).Name);
             }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
+            return result;
         }
+       
     }
 }
