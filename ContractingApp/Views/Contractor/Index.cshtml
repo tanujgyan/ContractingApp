@@ -23,7 +23,9 @@
             <th>
                 @Html.DisplayNameFor(model => model[0].HealthStatus)
             </th>
-            <th></th>
+            <th>
+                Action
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -44,9 +46,9 @@
                     @Html.DisplayFor(modelItem => item.HealthStatus)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="GetContractorDetails" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                   
+                    <a asp-action="GetContractorDetails" asp-route-id="@item.Id">Details</a>
+                   
                 </td>
             </tr>
         }
