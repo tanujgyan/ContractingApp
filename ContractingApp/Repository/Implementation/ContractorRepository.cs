@@ -191,19 +191,10 @@ namespace ContractingApp.Repository.Implementation
             try
             {
                 Dictionary<int, List<int>> adjacencyList = new Dictionary<int, List<int>>();
-                var relationsList = applicationContext.ContractorRelations.Where(x => (x.Contractor1Id == contractor1Id || x.Contractor2Id == contractor1Id) && x.IsDeleted == false).ToList();
-                var relationsList2 = applicationContext.ContractorRelations.Where(x => (x.Contractor1Id == contractor2Id || x.Contractor2Id == contractor2Id) && x.IsDeleted == false).ToList();
-                foreach (var r in relationsList2)
+                var relations = applicationContext.ContractorRelations.ToList();
+                foreach(var relation in relations)
                 {
-                    if (!relationsList.Contains(r))
-                    {
-                        relationsList.Add(r);
-                    }
-                }
-
-                foreach (var relation in relationsList)
-                {
-                    if (adjacencyList.ContainsKey(relation.Contractor1Id))
+                    if(adjacencyList.ContainsKey(relation.Contractor1Id))
                     {
                         adjacencyList[relation.Contractor1Id].Add(relation.Contractor2Id);
                     }
@@ -220,6 +211,7 @@ namespace ContractingApp.Repository.Implementation
                         adjacencyList.Add(relation.Contractor2Id, new List<int>() { relation.Contractor1Id });
                     }
                 }
+               
                 return adjacencyList;
             }
             catch (System.Exception)
